@@ -1,0 +1,15 @@
+﻿services:
+  postgres_db:
+    image: postgres
+    restart: always
+    container_name: pv178-database
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: project
+      POSTGRES_DB: pv178
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
