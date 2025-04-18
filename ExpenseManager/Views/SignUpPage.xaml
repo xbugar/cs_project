@@ -5,12 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:ExpenseManager.Views"
       xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+      xmlns:vm="clr-namespace:ExpenseManager.ViewModels"
       mc:Ignorable="d"
       Title="SignUpPage" Height="600" Width="1200" Background="#120917" Foreground="AliceBlue"
       FontFamily="{StaticResource FunnelDisplayFont}" FontSize="20">
     
     <Grid Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxHeight="600" MaxWidth="1200"
           MinHeight="500" MinWidth="1000">
+        <Grid.DataContext>
+            <vm:SignViewModel />
+        </Grid.DataContext>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -52,7 +56,8 @@
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
                             <Grid HorizontalAlignment="Stretch" Margin="5">
                                 <TextBlock Foreground="#99999999" Background="Transparent" Text="First Name" />
-                                <TextBox Background="Transparent" BorderBrush="Transparent"  Foreground="AliceBlue"/>
+                                <TextBox Background="Transparent" BorderBrush="Transparent"  Foreground="AliceBlue"
+                                         Text="{Binding User.FirstName}"/>
                             </Grid>
                             <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch" />
                         </StackPanel>
@@ -62,7 +67,8 @@
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
                             <Grid HorizontalAlignment="Stretch" Margin="5">
                                 <TextBlock Foreground="#99999999" Background="Transparent" Text="Last Name" />
-                                <TextBox Background="Transparent" BorderBrush="Transparent"  Foreground="AliceBlue"/>
+                                <TextBox Background="Transparent" BorderBrush="Transparent"  Foreground="AliceBlue"
+                                         Text="{Binding User.LastName}"/>
                             </Grid>
                             <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch" />
                         </StackPanel>
@@ -73,7 +79,8 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
                         <Grid HorizontalAlignment="Stretch" Margin="5">
                             <TextBlock Foreground="#99999999" Background="Transparent" Text="Email" />
-                            <TextBox Background="Transparent" BorderBrush="Transparent"  Foreground="AliceBlue"/>
+                            <TextBox Background="Transparent" BorderBrush="Transparent"  Foreground="AliceBlue"
+                                     Text="{Binding User.Email}"/>
                         </Grid>
                         <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch" />
                     </StackPanel>
@@ -83,7 +90,8 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
                         <Grid HorizontalAlignment="Stretch" Margin="5">
                             <TextBlock Foreground="#99999999" Background="Transparent" Text="Password"/>
-                            <PasswordBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"/>
+                            <PasswordBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
+                                         x:Name="Password"/>
                         </Grid>
                         <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch" />
                     </StackPanel>
@@ -104,7 +112,8 @@
                 </Grid>
                 <Border CornerRadius="10" Background="Purple" Margin="0, 20, 0, 0">
                     <Button Content="Sign Up" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent"
-                            HorizontalAlignment="Stretch" />
+                            HorizontalAlignment="Stretch" Command="{Binding SignUpCommand}"
+                            CommandParameter="{Binding ElementName=Password}"/>
                 </Border>
             </StackPanel>
         </Border>

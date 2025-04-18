@@ -6,8 +6,9 @@
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: project
       POSTGRES_DB: pv178
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: project
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

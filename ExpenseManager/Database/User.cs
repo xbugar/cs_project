@@ -16,10 +16,10 @@ public class User
     public string Email { get; set; }
 
     [Required]
-    public string HashedPassword { get; set; }
+    public byte[] HashedPassword { get; set; }
 
     [Required]
-    public string Salt { get; set; }
+    public byte[] Salt { get; set; }
 
     [Required]
     public string FirstName { get; set; }

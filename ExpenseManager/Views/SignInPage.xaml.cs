@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using ExpenseManager.ViewModels;
 
 namespace ExpenseManager.Views;
 
@@ -12,8 +13,6 @@ public partial class SignInPage : Page
         InitializeComponent();
     }
 
-    private void SwitchToSignUp_Click(object sender, RoutedEventArgs e)
-    {
+    private void SwitchToSignUp_Click(object sender, RoutedEventArgs e) =>
         _window.NavigateTo(_window.Pages[1]);
-    }
 }

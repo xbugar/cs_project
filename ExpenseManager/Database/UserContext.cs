@@ -8,5 +8,5 @@ public class UserContext : DbContext
     public DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=localhost;Username=pv178;Password=postgres;Database=project");
+        => optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=project;Database=pv178");
 }
