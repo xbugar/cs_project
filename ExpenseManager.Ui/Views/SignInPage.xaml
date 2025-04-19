@@ -1,13 +1,13 @@
-﻿<Page x:Class="ExpenseManager.Views.SignInPage"
+﻿<Page x:Class="ExpenseManager.Ui.Views.SignInPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:local="clr-namespace:ExpenseManager"
+      xmlns:local="clr-namespace:ExpenseManager.Ui"
       xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
-      xmlns:vm="clr-namespace:ExpenseManager.ViewModels"
+      xmlns:vm="clr-namespace:ExpenseManager.Ui.ViewModels"
       mc:Ignorable="d"
-      Height="600" Width="1200" Background="#120917" Foreground="AliceBlue"
+      Height="600" Width="1200" Background="Transparent" Foreground="AliceBlue"
       FontFamily="{StaticResource FunnelDisplayFont}" FontSize="20">
 
 
@@ -22,12 +22,22 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <svgc:SvgViewbox Grid.Column="0" Source="pack://application:,,,/Views/Pictures/Login.svg" Stretch="Uniform"
-                         VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <Border Grid.Column="0">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="10" Opacity="0.5" />
+            </Border.Effect>
+            <svgc:SvgViewbox Source="pack://application:,,,/Views/Pictures/Login.svg" Stretch="Uniform"
+                             VerticalAlignment="Center" HorizontalAlignment="Right" />
+        </Border>
         <TextBlock Grid.Column="0"
                    Margin="50, 30, 0, 0" FontSize="50" Text="Expense Manager" HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   FontWeight="UltraBlack" />
+                   FontWeight="UltraBlack">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="10" Opacity="1" />
+            </TextBlock.Effect>
+
+        </TextBlock>
         <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 0, 0, 50"
                    FontSize="30" FontWeight="UltraBlack">
             Build habits,
@@ -39,8 +49,15 @@
             <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center"
                         Margin="20, 120, 20, 0">
                 <TextBlock Text="Sing in to account" FontWeight="UltraBlack"
-                           HorizontalAlignment="Left" FontSize="40" />
+                           HorizontalAlignment="Left" FontSize="40">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="5" Opacity="1" />
+                    </TextBlock.Effect>
+                </TextBlock>
                 <TextBlock HorizontalAlignment="Left" FontSize="15">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="5" Opacity="1" />
+                    </TextBlock.Effect>
                     Dont have an account?
                     <Hyperlink Click="SwitchToSignUp_Click">
                         Sign Up
@@ -54,7 +71,11 @@
                             <TextBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
                                      Text="{Binding User.Email}" />
                         </Grid>
-                        <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch" />
+                        <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch">
+                            <Rectangle.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="1" />
+                            </Rectangle.Effect>
+                        </Rectangle>
                     </StackPanel>
                 </Border>
 
@@ -63,16 +84,24 @@
                         <Grid HorizontalAlignment="Stretch" Margin="5">
                             <TextBlock Foreground="#99999999" Background="Transparent" Text="Password" />
                             <PasswordBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
-                                         x:Name="Password"/>
+                                         x:Name="Password" />
                         </Grid>
-                        <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch" />
+                        <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch">
+                            <Rectangle.Effect>
+                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="1" />
+                            </Rectangle.Effect>
+                        </Rectangle>
                     </StackPanel>
                 </Border>
 
-                <Border CornerRadius="10" Background="Purple" Margin="0, 20, 0, 0">
-                    <Button Content="LogIn" FontWeight="Bold" Background="Transparent" BorderBrush="Transparent"
+                <Border CornerRadius="10" Background="#9D00FF" Margin="0, 20, 0, 0">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20" Color="Black" Opacity="0.5" ShadowDepth="10" />
+                    </Border.Effect>
+                    <Button Content="Log In" Background="Transparent" BorderBrush="Transparent"
                             HorizontalAlignment="Stretch" Command="{Binding SignInCommand}"
-                            CommandParameter="{Binding ElementName=Password}"/>
+                            CommandParameter="{Binding ElementName=Password}"
+                            Foreground="AliceBlue" />
                 </Border>
             </StackPanel>
         </Border>

@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using ExpenseManager.ViewModels;
+using ExpenseManager.Ui.ViewModels;
 
-namespace ExpenseManager.Views;
+namespace ExpenseManager.Ui.Views;
 
 public partial class SignUpPage : Page
 {

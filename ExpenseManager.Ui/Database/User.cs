@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExpenseManager.Database;
+namespace ExpenseManager.Ui.Database;
 
 [Index(nameof(Email), IsUnique = true)]
 public class User

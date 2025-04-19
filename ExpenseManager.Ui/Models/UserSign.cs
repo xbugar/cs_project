@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace ExpenseManager.Models;
+namespace ExpenseManager.Ui.Models;
 
 public class UserSign : ObservableObject
 {

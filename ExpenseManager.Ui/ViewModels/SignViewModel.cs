@@ -2,12 +2,12 @@
 using System.Windows.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ExpenseManager.Database;
-using ExpenseManager.Models;
-using ExpenseManager.Views;
+using ExpenseManager.Ui.Database;
+using ExpenseManager.Ui.Models;
+using ExpenseManager.Ui.Views;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExpenseManager.ViewModels;
+namespace ExpenseManager.Ui.ViewModels;
 
 public partial class SignViewModel : ObservableObject
 {

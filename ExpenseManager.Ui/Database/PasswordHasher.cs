@@ -1,5 +1,7 @@
-﻿namespace ExpenseManager.Database;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
+
+
+namespace ExpenseManager.Ui.Database;
 
 public static class PasswordHasher
 {

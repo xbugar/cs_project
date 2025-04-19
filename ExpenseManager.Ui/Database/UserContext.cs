@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ExpenseManager.Database;
+namespace ExpenseManager.Ui.Database;
 
 
 public class UserContext : DbContext

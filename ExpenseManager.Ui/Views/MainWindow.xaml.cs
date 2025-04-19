@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace ExpenseManager.Views;
+namespace ExpenseManager.Ui.Views;
 
 public partial class MainWindow : Window
 {
