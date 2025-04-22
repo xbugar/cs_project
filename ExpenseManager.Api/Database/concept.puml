@@ -1,0 +1,73 @@
+﻿@startuml
+title ExpenseManager Database Schema
+
+entity User {
+    Id: int
+    --
+    FirstName: string
+    LastName: string
+    Email: string
+    PasswordHash: byte[]
+}
+
+entity Account {
+    Id: int
+    --
+    Name: string
+    Color: string
+    Description: string
+
+    Balance: decimal
+    Type: Enum{TatraBanka}
+    Currency: Enum{EUR, CZK}
+    
+    CreatedAt: Date
+    UpdatedAt: Date
+}
+
+entity Transaction {
+    Id: int
+    --
+    Amount: decimal
+    
+    Description: string
+    PostingDate: Date
+}
+
+entity Expense {
+    Id: int
+}
+
+entity Income {
+    Id: int
+}
+
+entity Icon {
+    Id: int
+    --
+    Name: string
+    Icon: byte[]
+}
+
+entity "Enum Category" {
+    Food
+    Entertainment
+    Rent
+    Other
+}
+
+entity "Enum Type" {
+    Payout
+    Gift
+}
+
+
+User        ||--o{ Account
+Account     ||--o{ Transaction
+Icon        ||-o{ Account
+Transaction .      Expense
+Income      .      Transaction
+Expense     ||--|| "Enum Category"
+Income      ||--|| "Enum Type"
+
+@enduml

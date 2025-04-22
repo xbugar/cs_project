@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExpenseManager.Ui.Database;
+namespace ExpenseManager.Api.Database;
 
 [Index(nameof(Email), IsUnique = true)]
 public class User
@@ -13,17 +13,20 @@ public class User
 
     [Required]
     [EmailAddress]
-    public string Email { get; set; }
+    [StringLength(254)]
+    public string Email { get; init; } = null!;
 
     [Required]
-    public byte[] HashedPassword { get; set; }
+    public byte[] PasswordHash { get; init; } = null!;
 
     [Required]
-    public byte[] Salt { get; set; }
+    [StringLength(64)]
+    public string FirstName { get; init; } = null!;
 
     [Required]
-    public string FirstName { get; set; }
-
+    [StringLength(64)]
+    public string LastName { get; init; } = null!;
+    
     [Required]
-    public string LastName { get; set; }
+    public List<Account> Accounts { get; set; } = new ();
 }
