@@ -1,17 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseManager.Api.Database.MockData;
 
 public static class Seeding
 {
-    private static void SeedAccount(DbContext ctx, User user, decimal amount, int order)
+    private static readonly PasswordHasher<User> Auth = new();
+    private static void SeedAccount(DbContext ctx, User user, decimal amount, int order, string color)
     {
         var promise = ctx.Set<Account>().AddAsync(new Account
         {
             UserId = user.Id,
             Name = $"{user.LastName}'s {order}-th Account",
-            Color = "#FF0000",
-            Balance = amount,
+            Color = color,
+            Balance = amount
         });
 
         var account = promise.Result.Entity;
@@ -42,14 +44,14 @@ public static class Seeding
             FirstName = firstName,
             LastName = lastName,
             Email = email,
-            PasswordHash = "",
+            PasswordHash = Auth.HashPassword(new User(), "pes"),
         }).Entity;
         
         ctx.SaveChanges();
 
-        SeedAccount(ctx, user, 69m, 1);
-        SeedAccount(ctx, user, 128m, 2);
-        SeedAccount(ctx, user, 9999999999.48m, 3);
+        SeedAccount(ctx, user, 69m, 1, "#FF0000");
+        SeedAccount(ctx, user, 128m, 2, "#FF0000");
+        SeedAccount(ctx, user, 9999999999.48m, 3, "#FF0000");
     }
     
     public static async Task<bool> Seed(DbContext ctx)
@@ -59,7 +61,7 @@ public static class Seeding
             await ctx.SaveChangesAsync();
             
             SeedUser(ctx, "John", "Doe", "john.doe@email.com");
-            SeedUser(ctx, "Andrej", "Bugar", "bugar@email.com");
+            SeedUser(ctx, "Andrej", "Bugar", "burger");
             SeedUser(ctx, "Barack", "Obama", "barack.obama@email.com");
             SeedUser(ctx, "Joe", "Biden", "iamsotired@email.com");
             await ctx.SaveChangesAsync();

@@ -28,4 +28,12 @@
       <Resource Include="Views\Fonts\FunnelDisplay.ttf" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Page Update="Views\AccountWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
 </Project>

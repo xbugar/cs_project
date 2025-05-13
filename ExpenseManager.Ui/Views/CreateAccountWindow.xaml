@@ -1,0 +1,42 @@
+﻿<Window x:Class="ExpenseManager.Ui.Views.CreateAccountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:ExpenseManager.Ui.Views"
+        mc:Ignorable="d"
+        Title="CreateAccountWindow" Height="400" Width="300" Background="#16222E" Foreground="AliceBlue"
+        FontFamily="{StaticResource FunnelDisplayFont}" FontSize="20">
+    <Border Margin="10" CornerRadius="10" Background="Black">
+
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Orientation="Vertical" HorizontalAlignment="Stretch"
+                    Margin="10">
+            <TextBlock VerticalAlignment="Top" Margin="0, 4, 0, 4"
+                       HorizontalAlignment="Center" FontWeight="Heavy" Text="Create an Account" />
+            <Rectangle Fill="AliceBlue" HorizontalAlignment="Stretch" Height="2" Margin="3,0,3,0" />
+
+            <Border HorizontalAlignment="Stretch" Margin="10">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
+                    <Grid HorizontalAlignment="Stretch" Margin="5">
+                        <TextBlock Foreground="#99999999" Background="Transparent" Text="Account Name" />
+                        <TextBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
+                                 Text="{Binding User.Email}" />
+                    </Grid>
+                    <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </Border>
+
+            <Border HorizontalAlignment="Stretch" Margin="10" Background="#16222E">
+                <Grid HorizontalAlignment="Stretch" Margin="5">
+                    <TextBlock Foreground="#99999999" Background="Transparent" Text="Description"
+                               FontSize="15"/>
+                    <TextBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
+                             Text="{Binding User.Email}" MinHeight="150" FontSize="15"/>
+                </Grid>
+            </Border>
+            
+            
+
+        </StackPanel>
+    </Border>
+</Window>
