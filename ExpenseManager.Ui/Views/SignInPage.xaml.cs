@@ -6,8 +6,8 @@ namespace ExpenseManager.Ui.Views;
 
 public partial class SignInPage : Page
 {
-    private readonly MainWindow _window;
-    public SignInPage(MainWindow window)
+    private readonly LoginWindow _window;
+    public SignInPage(LoginWindow window)
     {
         _window = window;
         InitializeComponent();

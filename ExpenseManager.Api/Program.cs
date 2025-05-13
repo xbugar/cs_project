@@ -1,28 +1,28 @@
 using ExpenseManager.Api.Database;
+using ExpenseManager.Api.Requests;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApiContext>(options =>
-    options.UseNpgsql("Host=localhost;Username=postgres;Password=project;Database=pv178"));
+builder.WebHost.ConfigureKestrel(options => options.ListenAnyIP(3000));
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApiContext>(options => options.UseNpgsql(connectionString));
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApiContext>();
-    
-    // var users = dbContext.Users.ToList();
-    // string res = "";
-    //
-    // foreach (var user in users)
-    // {
-    //     res += $"User: {user.FirstName} {user.LastName}, Email: {user.Email}\n";
-    // }
-    
-    app.MapGet("/", () => dbContext.Accounts.ToList());
-    
-    app.Run();
-}
 
+using var scope = app.Services.CreateScope();
+var dbContext = scope.ServiceProvider.GetRequiredService<ApiContext>();
 
+RequestHelper.MapRequests(app, dbContext);
+
+app.MapGet("/", () => dbContext.Users.ToList());
+app.MapGet("/accounts", () =>
+    dbContext.Accounts.Select(a => new
+    {
+        a.Id,
+        a.Name,
+        a.Balance,
+    }).ToList());
+
+app.Run();

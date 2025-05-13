@@ -17,7 +17,7 @@ public class User
     public string Email { get; init; } = null!;
 
     [Required]
-    public byte[] PasswordHash { get; init; } = null!;
+    public string PasswordHash { get; init; } = null!;
 
     [Required]
     [StringLength(64)]

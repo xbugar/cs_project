@@ -10,6 +10,8 @@
       POSTGRES_PASSWORD: project
     ports:
       - '5432:5432'
+    networks:
+      - pv178-network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
       interval: 5s
@@ -27,3 +29,9 @@
     depends_on:
       postgres_db:
         condition: service_healthy
+    networks:
+      - pv178-network
+
+networks:
+  pv178-network:
+    name: pv178-network

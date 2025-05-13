@@ -8,16 +8,19 @@ public class ApiContext(DbContextOptions<ApiContext> options) : DbContext(option
     public DbSet<User> Users { get; set; }
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Expense> Transactions { get; set; }
-    public DbSet<Icon> Icons { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder
-            .UseNpgsql("Host=localhost;Username=postgres;Password=project;Database=pv178;Include Error Detail=true")
-            .EnableSensitiveDataLogging()
-            .LogTo(Console.WriteLine, LogLevel.Error)
             .UseSeeding((ctx, _) =>
             {
-                // Seeding.Seed(ctx).Wait();
+                try
+                {
+                    Seeding.Seed(ctx).Wait();
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("could not seed as it already exists");
+                }
             });
 }

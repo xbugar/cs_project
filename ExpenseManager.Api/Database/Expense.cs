@@ -13,5 +13,5 @@ public class Expense : Transaction
         Entertainment,
         Rent,
         Other
-    };
+    }
 }

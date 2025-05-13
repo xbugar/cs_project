@@ -3,15 +3,15 @@ using System.Windows.Controls;
 
 namespace ExpenseManager.Ui.Views;
 
-public partial class MainWindow : Window
+public partial class LoginWindow : Window
 {
     public readonly Page[] Pages;
     
-    public MainWindow()
+    public LoginWindow()
     {
         InitializeComponent();
-        MainFrame.Navigate(new SignInPage(this));
         Pages = [new SignInPage(this), new SignUpPage(this)];
+        MainFrame.Navigate(Pages[0]);
     }
 
     public void NavigateTo(Page page)

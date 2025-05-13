@@ -31,10 +31,4 @@ public class Account
 
     [Required]
     public decimal Balance { get; set; } = 0m;
-    
-    [Required]
-    public int IconId { get; set; }
-    
-    [ForeignKey(nameof(IconId))]
-    public Icon Icon { get; set; } = null!;
 }

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ExpenseManager;
+namespace ExpenseManager.Ui;
 
 /// <summary>
 /// Interaction logic for App.xaml

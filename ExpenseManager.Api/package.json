@@ -1,0 +1,8 @@
+﻿{
+  "scripts": {
+    "deploy:up": "docker compose -f docker-compose.yml up --build -d",
+    "deploy:down": "docker compose -f docker-compose.yml down --remove-orphans",
+    "db:up": "docker compose -f docker-compose.postgres.yml up -d && dotnet ef database update",
+    "db:down": "docker compose -f docker-compose.postgres.yml down --remove-orphans"
+  }
+}

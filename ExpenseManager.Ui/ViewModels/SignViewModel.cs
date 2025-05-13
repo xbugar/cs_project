@@ -1,55 +1,60 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ExpenseManager.Ui.Models;
+using ExpenseManager.Ui.Services;
 
 namespace ExpenseManager.Ui.ViewModels;
 
 public partial class SignViewModel : ObservableObject
 {
     [ObservableProperty]
-    private UserSign user = new UserSign();
+    private UserSign _user = new UserSign();
     
     [RelayCommand]
-    private void SignIn(PasswordBox passwordBox)
+    private async Task SignIn(PasswordBox passwordBox)
     {
-        // string password = passwordBox.Password;
-        // using UserContext ctx = new UserContext();
-        //
-        // User? dbUser = ctx.Users.FirstOrDefaultAsync(u => u.Email == User.Email).Result;
-        // if (dbUser == null || !PasswordHasher.VerifyPassword(password, dbUser.Salt, dbUser.HashedPassword))
-        // {
-        //     MessageBox.Show("Either Email or Password is incorrect.");
-        //     return;
-        // }
-        //
-        // MessageBox.Show($"Welcome, {dbUser.FirstName} {dbUser.LastName}!");
+        if (User.Email == null)
+        {
+            MessageBox.Show("Email is required");
+            return;
+        }
+        
+        var response = await SignService.SignIn(User, passwordBox.Password);
+        if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
+        {
+            MessageBox.Show("Wrong credentials");
+            return;
+        }
+
+        var mainApp = new Views.AppWindow();
+        mainApp.Show();
+        Application.Current.MainWindow?.Close();
+
+        Application.Current.MainWindow = mainApp;
     }
 
     [RelayCommand]
-    private void SignUp(PasswordBox passwordBox)
+    private async Task SignUp(PasswordBox passwordBox)
     {
-        // string password = passwordBox.Password;
-        // using UserContext ctx = new UserContext();
-        //
-        // if (ctx.Users.AnyAsync(u => u.Email == User.Email).Result)
-        // {
-        //     MessageBox.Show("This Email is already registered.");
-        //     return;
-        // }
-        //
-        // (byte[] hashedPassword, byte[] salt) = PasswordHasher.HashPassword(password);
-        //
-        // ctx.Users.AddAsync(new User
-        // {
-        //     Email = User.Email,
-        //     FirstName = User.FirstName,
-        //     LastName = User.LastName,
-        //     HashedPassword = hashedPassword,
-        //     Salt = salt
-        // });
-        // ctx.SaveChangesAsync();
-        //
-        // MessageBox.Show("User registered successfully.");
+        if (User.FirstName == null || User.LastName == null || User.Email == null)
+        {
+            MessageBox.Show("All fields are required");
+            return;
+        }
+        
+        var response = await SignService.SignUp(User, passwordBox.Password);
+        if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
+        {
+            MessageBox.Show("User already exists");
+            return;
+        }
+        
+        var mainApp = new Views.AppWindow();
+        mainApp.Show();
+        Application.Current.MainWindow?.Close();
+        
+        Application.Current.MainWindow = mainApp;
     }
 }
