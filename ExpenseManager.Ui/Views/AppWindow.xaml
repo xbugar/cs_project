@@ -111,7 +111,8 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <Border Margin="5" Background="#9D00FF" CornerRadius="10">
-                            <Button Background="Transparent" BorderBrush="Transparent" Content="Add an account" />
+                            <Button Background="Transparent" BorderBrush="Transparent" Content="Add an account"
+                                    Command="{Binding AddAccountCommand}"/>
                         </Border>
                     </StackPanel>
                 </ScrollViewer>

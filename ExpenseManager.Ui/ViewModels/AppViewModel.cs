@@ -25,4 +25,11 @@ public partial class AppViewModel : ObservableObject
 
         Application.Current.MainWindow = login;
     }
+    
+    [RelayCommand]
+    private void AddAccount()
+    {
+        var createAccountWindow = new CreateAccountWindow();
+        createAccountWindow.Show();
+    }
 }

@@ -36,4 +36,8 @@
       </Page>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Views\Sign\" />
+    </ItemGroup>
+
 </Project>
