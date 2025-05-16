@@ -76,23 +76,17 @@ namespace ExpenseManager.Api.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("character varying(13)");
-
                     b.Property<DateTime>("PostingDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
 
-                    b.ToTable("Transaction");
-
-                    b.HasDiscriminator().HasValue("Transaction");
-
-                    b.UseTphMappingStrategy();
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("ExpenseManager.Api.Database.User", b =>
@@ -128,16 +122,6 @@ namespace ExpenseManager.Api.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("ExpenseManager.Api.Database.Expense", b =>
-                {
-                    b.HasBaseType("ExpenseManager.Api.Database.Transaction");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
-
-                    b.HasDiscriminator().HasValue("Expense");
                 });
 
             modelBuilder.Entity("ExpenseManager.Api.Database.Account", b =>

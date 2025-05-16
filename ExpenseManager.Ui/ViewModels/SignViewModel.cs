@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Net.Http.Json;
+using System.Windows;
 using System.Windows.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,6 +12,9 @@ public partial class SignViewModel : ObservableObject
 {
     [ObservableProperty]
     private UserSign _user = new UserSign();
+    
+    private record UserSignResponse(int UserId);
+    
     
     [RelayCommand]
     private async Task SignIn(PasswordBox passwordBox)
@@ -27,8 +31,19 @@ public partial class SignViewModel : ObservableObject
             MessageBox.Show("Wrong credentials");
             return;
         }
+        
+        var responseContent = await response.Content.ReadFromJsonAsync<UserSignResponse>();
+        
+        if (responseContent == null)
+        {
+            MessageBox.Show("Failed to get user ID");
+            return;
+        }
+        
+        int userId = responseContent.UserId;
+        
+        var mainApp = new Views.AppWindow(userId);
 
-        var mainApp = new Views.AppWindow();
         mainApp.Show();
         Application.Current.MainWindow?.Close();
 
@@ -51,7 +66,17 @@ public partial class SignViewModel : ObservableObject
             return;
         }
         
-        var mainApp = new Views.AppWindow();
+        var responseContent = await response.Content.ReadFromJsonAsync<UserSignResponse>();
+        
+        if (responseContent == null)
+        {
+            MessageBox.Show("Failed to get user ID");
+            return;
+        }
+        
+        int userId = responseContent.UserId;
+        
+        var mainApp = new Views.AppWindow(userId);
         mainApp.Show();
         Application.Current.MainWindow?.Close();
         

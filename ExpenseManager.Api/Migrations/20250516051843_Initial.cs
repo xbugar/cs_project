@@ -52,23 +52,22 @@ namespace ExpenseManager.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Transaction",
+                name: "Transactions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Type = table.Column<int>(type: "integer", nullable: false),
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
                     PostingDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    AccountId = table.Column<int>(type: "integer", nullable: false),
-                    Discriminator = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false),
-                    Type = table.Column<int>(type: "integer", nullable: true)
+                    AccountId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transaction", x => x.Id);
+                    table.PrimaryKey("PK_Transactions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Transaction_Accounts_AccountId",
+                        name: "FK_Transactions_Accounts_AccountId",
                         column: x => x.AccountId,
                         principalTable: "Accounts",
                         principalColumn: "Id",
@@ -81,8 +80,8 @@ namespace ExpenseManager.Api.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transaction_AccountId",
-                table: "Transaction",
+                name: "IX_Transactions_AccountId",
+                table: "Transactions",
                 column: "AccountId");
 
             migrationBuilder.CreateIndex(
@@ -96,7 +95,7 @@ namespace ExpenseManager.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Transaction");
+                name: "Transactions");
 
             migrationBuilder.DropTable(
                 name: "Accounts");

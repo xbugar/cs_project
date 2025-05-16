@@ -21,18 +21,12 @@ public static class Seeding
         ctx.SaveChanges();
         for (int i = 0; i < 10; i++)
         {
-            ctx.Set<Transaction>().AddAsync(new Expense
+            ctx.Set<Transaction>().AddAsync(new Transaction
             {
                 Amount = 7.00m,
                 Description = "Test Expense",
                 AccountId = account.Id,
-            });
-
-            ctx.Set<Transaction>().AddAsync(new Income
-            {
-                Amount = 9.00m,
-                Description = "Test Income",
-                AccountId = promise.Result.Entity.Id,
+                Type = Transaction.TransactionType.Entertainment,
             });
         }
     }

@@ -1,8 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using ExpenseManager.Ui.ViewModels;
 
-namespace ExpenseManager.Ui.Views;
+namespace ExpenseManager.Ui.Views.Sign;
 
 public partial class SignInPage : Page
 {

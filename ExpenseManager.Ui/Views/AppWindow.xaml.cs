@@ -5,10 +5,11 @@ namespace ExpenseManager.Ui.Views;
 
 public partial class AppWindow : Window
 {
-    public AppWindow()
+    public AppWindow(int userId)
     {
         InitializeComponent();
-
+        DataContext = new ViewModels.AppViewModel(userId);
+        
         WpfPlot1.Plot.Add.Palette = new ScottPlot.Palettes.Penumbra();
 
         double[] dataX = [1, 2, 3, 4, 5];

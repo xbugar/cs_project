@@ -11,9 +11,9 @@
         Title="MainApp" Height="700" Width="1200" Background="#16222E" Foreground="AliceBlue"
         FontFamily="{StaticResource FunnelDisplayFont}" FontSize="20">
     <Grid Margin="10, 10, 10, 10">
-        <Grid.DataContext>
-            <vm:AppViewModel />
-        </Grid.DataContext>
+        <!-- <Grid.DataContext> -->
+        <!--     <vm:AppViewModel /> -->
+        <!-- </Grid.DataContext> -->
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7.5*" />
@@ -54,7 +54,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="User1984" FontWeight="Bold" VerticalAlignment="Center"
+                        <TextBlock Grid.Column="0" Text="{Binding User.FirstName}" FontWeight="Bold" VerticalAlignment="Center"
                                    HorizontalAlignment="Stretch" />
                         <Border Grid.Column="1" Margin="5" Background="#0f0f0f" CornerRadius="5">
                             <Grid Margin="5, 5, 5, 5">
@@ -78,7 +78,7 @@
                 <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
 
                     <StackPanel Height="Auto">
-                        <ItemsControl ItemsSource="{Binding Accounts}">
+                        <ItemsControl ItemsSource="{Binding User.Accounts}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Border Margin="0,0,0,10" CornerRadius="5" Background="#0f0f0f">

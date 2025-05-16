@@ -3,11 +3,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpenseManager.Api.Database;
 
-public abstract class Transaction
+public class Transaction
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; private set; }
+    
+    [Required]
+    public TransactionType Type { get; set; } = TransactionType.Other;
+    
+    public enum TransactionType
+    {
+        Income,
+        Savings,
+        Food,
+        Entertainment,
+        Rent,
+        Other
+    }
     
     [Required]
     public decimal Amount { get; set; }

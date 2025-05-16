@@ -7,7 +7,7 @@ public class ApiContext(DbContextOptions<ApiContext> options) : DbContext(option
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Account> Accounts { get; set; }
-    public DbSet<Expense> Transactions { get; set; }
+    public DbSet<Transaction> Transactions { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

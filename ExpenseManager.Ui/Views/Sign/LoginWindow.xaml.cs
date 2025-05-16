@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace ExpenseManager.Ui.Views;
+namespace ExpenseManager.Ui.Views.Sign;
 
 public partial class LoginWindow : Window
 {

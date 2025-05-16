@@ -9,10 +9,11 @@ public class AuthRequest(WebApplication app, ApiContext context) : Request(app, 
     private static readonly PasswordHasher<User> Auth = new();
 
     private record LoginRequest(string Email, string Password);
+
     private record RegisterRequest(string FirstName, string LastName, string Email, string Password);
 
 
-    private async Task<IResult> MapSignIn(LoginRequest request)
+    private async Task<IResult> SignIn(LoginRequest request)
     {
         var user = await DbContext.Users
             .FirstOrDefaultAsync(u => u.Email == request.Email);
@@ -26,10 +27,10 @@ public class AuthRequest(WebApplication app, ApiContext context) : Request(app, 
         }
 
         Console.WriteLine($"Logged In -> email: {user.Email}\n password: {request.Password}");
-        return Results.Ok(user.Id);
+        return Results.Ok(new { user.Id, user.FirstName });
     }
 
-    private async Task<IResult> MapSignUp(RegisterRequest request)
+    private async Task<IResult> SignUp(RegisterRequest request)
     {
         var user = new User
         {
@@ -52,7 +53,8 @@ public class AuthRequest(WebApplication app, ApiContext context) : Request(app, 
 
         Console.WriteLine(
             $"name: {user.FirstName} {user.LastName}\n email: {user.Email}\n password: {request.Password}");
-        return Results.Ok( new {
+        return Results.Ok(new
+        {
             user.Id,
             user.FirstName
         });
@@ -60,7 +62,7 @@ public class AuthRequest(WebApplication app, ApiContext context) : Request(app, 
 
     public override void Map()
     {
-        App.MapPost("/auth/signin", MapSignIn);
-        App.MapPost("/auth/signup", MapSignUp);
+        App.MapPost("/auth/signin", SignIn);
+        App.MapPost("/auth/signup", SignUp);
     }
 }

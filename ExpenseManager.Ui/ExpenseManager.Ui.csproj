@@ -34,10 +34,21 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Views\Sign\" />
+      <Page Update="Views\Sign\SignInPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\Sign\SignUpPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+      <Page Update="Views\Sign\LoginWindow.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
 </Project>
