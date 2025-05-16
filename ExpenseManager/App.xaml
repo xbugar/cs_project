@@ -1,0 +1,9 @@
+﻿<Application x:Class="ExpenseManager.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ExpenseManager"
+             StartupUri="/Views/Sign/LoginWindow.xaml">
+    <Application.Resources>
+        <FontFamily x:Key="FunnelDisplayFont">pack://application:,,,/Views/Fonts/FunnelDisplay.ttf#Funnel Display</FontFamily>
+    </Application.Resources>
+</Application>
