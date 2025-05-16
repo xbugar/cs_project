@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using ExpenseManager.Models.Main;
+using ExpenseManager.Database;
+using Account = ExpenseManager.Models.Main.Account;
 
 namespace ExpenseManager.ViewModels;
 
-public partial class CreateAccountViewModel : ObservableObject
+public partial class CreateAccountViewModel(User user) : ObservableObject
 {
-    [ObservableProperty] private Account account = new ();
+    // [ObservableProperty] private Account _account = new ();
 }

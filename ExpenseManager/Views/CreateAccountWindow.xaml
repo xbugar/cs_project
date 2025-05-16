@@ -75,9 +75,9 @@
     </Window.Resources>
 
     <Border Margin="10" CornerRadius="10" Background="Black">
-        <Border.DataContext>
-            <viewModels:CreateAccountViewModel />
-        </Border.DataContext>
+        <!-- <Border.DataContext> -->
+        <!--     <viewModels:CreateAccountViewModel /> -->
+        <!-- </Border.DataContext> -->
 
         <Grid>
             <Grid.ColumnDefinitions>

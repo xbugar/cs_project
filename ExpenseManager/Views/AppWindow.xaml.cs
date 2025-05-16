@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ExpenseManager.Database;
 using ExpenseManager.ViewModels;
 using ScottPlot;
 
@@ -6,10 +7,10 @@ namespace ExpenseManager.Views;
 
 public partial class AppWindow : Window
 {
-    public AppWindow(int userId)
+    public AppWindow(User user)
     {
         InitializeComponent();
-        DataContext = new AppViewModel(userId);
+        DataContext = new AppViewModel(user);
         
         WpfPlot1.Plot.Add.Palette = new ScottPlot.Palettes.Penumbra();
 

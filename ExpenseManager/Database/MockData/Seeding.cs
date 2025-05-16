@@ -26,7 +26,7 @@ public static class Seeding
                 Amount = 7.00m,
                 Description = "Test Expense",
                 AccountId = account.Id,
-                Type = Transaction.TransactionType.Entertainment,
+                Type = Transaction.TransactionType.Entertainment
             });
         }
     }
@@ -44,8 +44,8 @@ public static class Seeding
         ctx.SaveChanges();
 
         SeedAccount(ctx, user, 69m, 1, "#FF0000");
-        SeedAccount(ctx, user, 128m, 2, "#FF0000");
-        SeedAccount(ctx, user, 9999999999.48m, 3, "#FF0000");
+        SeedAccount(ctx, user, 128m, 2, "#00FF00");
+        SeedAccount(ctx, user, 9999999999.48m, 3, "#0000FF");
     }
     
     public static async Task<bool> Seed(DbContext ctx)
@@ -58,6 +58,7 @@ public static class Seeding
             SeedUser(ctx, "Andrej", "Bugar", "burger");
             SeedUser(ctx, "Barack", "Obama", "barack.obama@email.com");
             SeedUser(ctx, "Joe", "Biden", "iamsotired@email.com");
+            
             await ctx.SaveChangesAsync();
             return true;
         }

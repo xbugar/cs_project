@@ -29,9 +29,9 @@ public partial class SignViewModel : ObservableObject
             return;
         }
 
-        var userId = res.Value.Id;
+        var user = res.Value;
         
-        var mainApp = new Views.AppWindow(userId);
+        var mainApp = new Views.AppWindow(user);
         mainApp.Show();
         
         Application.Current.MainWindow?.Close();
@@ -54,9 +54,9 @@ public partial class SignViewModel : ObservableObject
             return;
         }
         
-        var userId = res.Value.Id;
+        var user = res.Value;
         
-        var mainApp = new Views.AppWindow(userId);
+        var mainApp = new Views.AppWindow(user);
         mainApp.Show();
         Application.Current.MainWindow?.Close();
         

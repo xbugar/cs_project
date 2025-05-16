@@ -1,10 +1,11 @@
 ﻿using System.Text.Json;
-using ExpenseManager.Models.Main;
+using CSharpFunctionalExtensions;
+using ExpenseManager.Database;
+using Account = ExpenseManager.Models.Main.Account;
 
 namespace ExpenseManager.Services;
 
 public static class UserService
 {
-    // public static async Task<(UserMain? user, object? graphData)> GetUser(int userId)
-    // {
+    public record UserMainWindow(User User, Graph.GraphData GraphData);
 }

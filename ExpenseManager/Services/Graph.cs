@@ -6,8 +6,9 @@ public static class Graph
 {
     public record GraphData(decimal[] X, int[] Y, string Color);
 
-    private static Task<GraphData> AccountGraphData(AppDbContext db, Account account) => Task.Run(() =>
+    private static Task<GraphData> AccountGraphData(Account account) => Task.Run(() =>
     {
+        using var db = new AppDbContext();
         var transactions = db.Transactions
             .Where(trans => trans.AccountId == account.Id && trans.PostingDate >= DateTime.UtcNow.AddMonths(-1))
             .GroupBy(t => t.PostingDate.Date)
@@ -30,9 +31,9 @@ public static class Graph
         return new GraphData(x, y, account.Color);
     });
 
-    public static async Task<GraphData[]> AccountsGraphData(AppDbContext db, List<Account> accounts)
+    public static async Task<GraphData[]> AccountsGraphData(List<Account> accounts)
     {
-        var tasks = accounts.Select(account => AccountGraphData(db, account)).ToArray();
+        var tasks = accounts.Select(AccountGraphData).ToArray();
         var results = await Task.WhenAll(tasks);
         return results;
     }

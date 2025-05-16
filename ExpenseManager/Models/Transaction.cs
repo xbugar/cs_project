@@ -2,7 +2,7 @@
 
 namespace ExpenseManager.Models;
 
-public abstract class Transaction  : ObservableObject
+public class Transaction  : ObservableObject
 {
     public int Id { get; set; }
     public decimal Amount { get; set; }
