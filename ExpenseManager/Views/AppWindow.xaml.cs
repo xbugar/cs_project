@@ -11,6 +11,7 @@ public partial class AppWindow : Window
     {
         InitializeComponent();
         DataContext = new AppViewModel(user, WpfPlot1);
+
         
         WpfPlot1.Plot.Add.Palette = new ScottPlot.Palettes.Penumbra();
         

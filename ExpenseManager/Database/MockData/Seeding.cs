@@ -64,7 +64,6 @@ public static class Seeding
         }
         catch (Exception)
         {
-            Console.WriteLine("Something went wrong while seeding the database");
             Console.WriteLine("No seeding was performed");
             throw;
         }

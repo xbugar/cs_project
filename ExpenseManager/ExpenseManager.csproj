@@ -30,6 +30,10 @@
       <Resource Include="Views\Pictures\Login.svg" />
       <None Remove="Views\Pictures\LogOut.svg" />
       <Resource Include="Views\Pictures\LogOut.svg" />
+      <None Remove="Views\Pictures\bin.svg" />
+      <Resource Include="Views\Pictures\bin.svg" />
+      <None Remove="Views\Pictures\search.svg" />
+      <Resource Include="Views\Pictures\search.svg" />
     </ItemGroup>
 
     <ItemGroup>

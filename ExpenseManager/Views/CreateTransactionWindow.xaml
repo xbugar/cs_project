@@ -17,7 +17,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
-        <Style TargetType="ComboBox" >
+        <Style TargetType="ComboBox">
             <Setter Property="Foreground" Value="AliceBlue" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="AliceBlue" />
@@ -80,16 +80,16 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <StackPanel Grid.ColumnSpan="2" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch"
@@ -131,7 +131,7 @@
 
             </Border>
 
-            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="10" Background="#16222E"
+            <Border Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10" Background="#16222E"
                     CornerRadius="10">
                 <Grid HorizontalAlignment="Stretch" Margin="5">
                     <TextBlock Foreground="#99999999" Background="Transparent" Text="Description"
@@ -140,32 +140,89 @@
                              Text="{Binding Account.Description}" FontSize="15" />
                 </Grid>
             </Border>
-            
-            <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="10" 
-                    Background="#16222E" CornerRadius="10" 
-                    AllowDrop="True" 
-                    Drop="Border_Drop" 
+
+            <Border Grid.Row="2" Grid.Column="1" Margin="10" Background="#16222E" CornerRadius="10">
+                <DatePicker Margin="5"
+                            Background="Transparent"
+                            Foreground="AliceBlue"
+                            BorderBrush="Transparent"
+                            SelectedDate="{Binding Transaction.PostingDate}"
+                            FontSize="15">
+                    <DatePicker.Resources>
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Foreground" Value="AliceBlue" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Style>
+                    </DatePicker.Resources>
+                    <DatePicker.CalendarStyle>
+                        <Style TargetType="Calendar">
+                            <Setter Property="Background" Value="#1E1E1E" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="BorderBrush" Value="#9D00FF" />
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="Width" Value="300" />
+                            <Setter Property="Height" Value="300" />
+                            <Setter Property="FontSize" Value="14" />
+                            <Style.Resources>
+                                <Style TargetType="CalendarButton">
+                                    <Setter Property="MinWidth" Value="40" />
+                                    <Setter Property="MinHeight" Value="40" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="Foreground" Value="White" />
+                                </Style>
+                                <Style TargetType="CalendarDayButton">
+                                    <Setter Property="MinWidth" Value="40" />
+                                    <Setter Property="MinHeight" Value="40" />
+                                    <Setter Property="FontSize" Value="14" />
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#444444" />
+                                            <Setter Property="Foreground" Value="#FFFFFF" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#9D00FF" />
+                                            <Setter Property="Foreground" Value="White" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                                <Style TargetType="CalendarItem">
+                                    <Setter Property="Background" Value="#1E1E1E" />
+                                    <Setter Property="BorderBrush" Value="#777777" />
+                                </Style>
+                            </Style.Resources>
+                        </Style>
+                    </DatePicker.CalendarStyle>
+                </DatePicker>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="10"
+                    Background="#16222E" CornerRadius="10"
+                    AllowDrop="True"
+                    Drop="Border_Drop"
                     DragOver="Border_DragOver">
                 <Grid>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="Drop Files Here" 
-                                   FontSize="16" 
+                        <TextBlock Text="Drop Files Here"
+                                   FontSize="16"
                                    Foreground="#99999999"
-                                   HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding SelectedFileName}" 
-                                   FontSize="14" 
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Text="{Binding SelectedFileName}"
+                                   FontSize="14"
                                    Foreground="AliceBlue"
                                    Margin="0,5,0,0"
-                                   HorizontalAlignment="Center"/>
+                                   HorizontalAlignment="Center" />
                     </StackPanel>
                 </Grid>
             </Border>
-            
-            <Border Grid.Row="4" Grid.Column="1" Margin="5" Background="#9D00FF" CornerRadius="10" HorizontalAlignment="Right"
+
+            <Border Grid.Row="4" Grid.Column="1" Margin="5" Background="#9D00FF" CornerRadius="10"
+                    HorizontalAlignment="Right"
                     Padding="5, 2, 5, 2" VerticalAlignment="Bottom">
                 <Button Background="Transparent" BorderBrush="Transparent" Content="Create" FontWeight="Bold"
                         Command="{Binding CreateTransactionCommand}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
             </Border>
         </Grid>
 

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using CSharpFunctionalExtensions;
@@ -8,38 +9,39 @@ namespace ExpenseManager.Services;
 
 public class Files
 {
-    private static Task<Result<List<Transaction>>> ImportTransactions(string file, Account account) => Task.Run(async () =>
-    {
-        var result = new List<Transaction>();
-        if (!file.EndsWith(".csv"))
-            return Result.Failure<List<Transaction>>("Invalid file format .csv required");
-
-        var lines = await File.ReadAllLinesAsync(file);
-
-        var correctLines = lines
-            .Skip(1)
-            .Select(l => l.Split("\t"))
-            .Where(l => l.Length == 10);
-
-        foreach (var line in correctLines)
+    private static Task<Result<List<Transaction>>> ImportTransactions(string file, Account account) =>
+        Task.Run(async () =>
         {
-            try
+            var result = new List<Transaction>();
+            if (!file.EndsWith(".csv"))
+                return Result.Failure<List<Transaction>>("Invalid file format .csv required");
+
+            var lines = await File.ReadAllLinesAsync(file);
+
+            var correctLines = lines
+                .Skip(1)
+                .Select(l => l.Split(","));
+
+            foreach (var line in correctLines)
             {
-                result.Add(new()
+                try
                 {
-                    AccountId = account.Id,
-                    PostingDate = DateTime.Parse(line[2]),
-                    Amount = decimal.Parse(line[5]),
-                    Description = line[4],
-                });
+                    result.Add(new()
+                    {
+                        AccountId = account.Id,
+                        PostingDate = DateTime.Parse(line[2]).ToUniversalTime(),
+                        Amount = decimal.Parse(line[5]),
+                        Description = line[4],
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
-            catch (Exception)
-            {
-                return Result.Failure<List<Transaction>>("Invalid file format");
-            }
-        }
-        return result;
-    });
+
+            return result;
+        });
 
     public static async Task<List<Transaction>> ProcessDroppedFile(string[] files, Account account)
     {
@@ -68,7 +70,7 @@ public class Files
         }
         catch (Exception e)
         {
-            MessageBox.Show(e.Message);
+            MessageBox.Show(e.ToString());
             return [];
         }
 

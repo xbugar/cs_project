@@ -24,7 +24,6 @@ public static class AuthService
             return Result.Failure<User>("Wrong credentials");
         }
 
-        // Console.WriteLine($"Logged In -> email: {user.Email}\n password: {password}");
         return user;
     }
 
@@ -49,8 +48,6 @@ public static class AuthService
             return Result.Failure<User>("User already exists");
         }
 
-        Console.WriteLine(
-            $"name: {user.FirstName} {user.LastName}\n email: {user.Email}\n password: {password}");
         return Result.Success(user);
     }
 }

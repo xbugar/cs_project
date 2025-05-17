@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using ExpenseManager.Database;
 using ExpenseManager.ViewModels;
 using ScottPlot;
@@ -7,10 +8,10 @@ namespace ExpenseManager.Views;
 
 public partial class AccountWindow : Window
 {
-    public AccountWindow(Account account)
+    public AccountWindow(Account account, ObservableCollection<Account> accounts)
     {
         InitializeComponent();
-        DataContext = new AccountViewModel(account, WpfPlot2);
+        DataContext = new AccountViewModel(account, WpfPlot2, accounts);
         
         WpfPlot2.Plot.Add.Palette = new ScottPlot.Palettes.Penumbra();
         WpfPlot2.Plot.FigureBackground.Color = Color.FromHex("#16222E");

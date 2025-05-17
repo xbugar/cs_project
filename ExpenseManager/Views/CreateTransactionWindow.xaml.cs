@@ -20,15 +20,14 @@ public partial class CreateTransactionWindow : Window
         e.Handled = true;
     }
 
-    private void Border_Drop(object sender, DragEventArgs e)
+    private async void Border_Drop(object sender, DragEventArgs e)
     {
-        if (e.Data.GetDataPresent(DataFormats.FileDrop))
-        {
-            var files = (string[])(e.Data.GetData(DataFormats.FileDrop) ?? Array.Empty<string>());
-            if (files.Length > 0 && DataContext is CreateTransactionViewModel viewModel)
-            {
-                viewModel.ProcessDroppedFile(files);
-            }
-        }
+        if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+            return;
+        
+        var files = (string[])(e.Data.GetData(DataFormats.FileDrop) ?? Array.Empty<string>());
+
+        if (files.Length > 0 && DataContext is CreateTransactionViewModel viewModel)
+            await viewModel.ProcessDroppedFile(files);
     }
 }

@@ -2,6 +2,7 @@
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CSharpFunctionalExtensions;
 using ExpenseManager.Database;
 using ExpenseManager.Services;
 using ExpenseManager.Views;
@@ -15,8 +16,8 @@ namespace ExpenseManager.ViewModels;
 public partial class AppViewModel : ObservableObject
 {
     [ObservableProperty] private User _user;
-    
-    [ObservableProperty] private WpfPlot? _plot;
+
+    private readonly WpfPlot? _plot;
 
     [ObservableProperty] private ObservableCollection<Account> _accounts = [];
 
@@ -37,8 +38,8 @@ public partial class AppViewModel : ObservableObject
                 .ToListAsync()
         );
 
-        if (Plot != null)
-            await Graph.AccountsGraphData(Accounts.ToList(), Plot);
+        if (_plot != null)
+            await Graph.AccountsGraphData(Accounts.ToList(), _plot);
     }
 
     [RelayCommand]
@@ -58,11 +59,31 @@ public partial class AppViewModel : ObservableObject
         var createAccountWindow = new CreateAccountWindow(User, Accounts);
         createAccountWindow.Show();
     }
-    
+
     [RelayCommand]
     private void OpenAccount(Account account)
     {
-        var detailsWindow = new AccountWindow(account);
+        var detailsWindow = new AccountWindow(account, Accounts);
         detailsWindow.Show();
+    }
+
+    async partial void OnAccountsChanged(ObservableCollection<Account>? oldValue, ObservableCollection<Account> newValue)
+    {
+        try
+        {
+            if (_plot == null) return;
+        
+            // does not work
+            _plot.Plot.Clear();
+        
+            _plot.Plot.Add.HorizontalLine(y: 0, color: Color.FromHex("#9D00FF"));
+
+            await Graph.AccountsGraphData(newValue.ToList(), _plot);
+            _plot.Refresh();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 }
