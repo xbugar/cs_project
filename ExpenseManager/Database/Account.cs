@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CommunityToolkit.Mvvm.ComponentModel;
+using ExpenseManager.Models;
 
 namespace ExpenseManager.Database;
 
-public class Account
+public class Account : IComparable<Account>
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -31,4 +33,6 @@ public class Account
 
     [Required]
     public decimal Balance { get; set; } = 0m;
+
+    public int CompareTo(Account? other) => String.Compare(Name, other?.Name, StringComparison.Ordinal);
 }

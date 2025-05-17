@@ -7,13 +7,9 @@
         xmlns:scottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
         xmlns:vm="clr-namespace:ExpenseManager.ViewModels"
         mc:Ignorable="d"
-        Title="MainApp" Height="700" Width="1200" Background="#16222E" Foreground="AliceBlue"
+        Title="MainApp" Height="700" Width="1000" Background="#16222E" Foreground="AliceBlue"
         FontFamily="{StaticResource FunnelDisplayFont}" FontSize="20">
     <Grid Margin="10, 10, 10, 10">
-        <!-- <Grid.DataContext> -->
-        <!--     <vm:AppViewModel /> -->
-        <!-- </Grid.DataContext> -->
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7.5*" />
             <ColumnDefinition Width="3*" />
@@ -53,7 +49,8 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" Text="{Binding User.FirstName}" FontWeight="Bold" VerticalAlignment="Center"
+                        <TextBlock Grid.Column="0" Text="{Binding User.FirstName}" FontWeight="Bold"
+                                   VerticalAlignment="Center"
                                    HorizontalAlignment="Stretch" />
                         <Border Grid.Column="1" Margin="5" Background="#0f0f0f" CornerRadius="5">
                             <Grid Margin="5, 5, 5, 5">
@@ -74,36 +71,66 @@
                 </StackPanel>
 
                 <TextBlock Grid.Row="1" Text="Accounts:" Foreground="#46525E" FontSize="15" Margin="0, 5, 0, 5" />
-                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
-
-                    <StackPanel Height="Auto">
-                        <ItemsControl ItemsSource="{Binding User.Accounts}">
+                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding Accounts}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="0,0,0,10" CornerRadius="5" Background="#0f0f0f">
-                                        <Grid>
+                                    <Border Margin="0,0,0,10" CornerRadius="10" Background="#101010"
+                                            BorderThickness="1">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Background" Value="#101010"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#252525"/>
+                                                        <Setter Property="BorderBrush" Value="#9D00FF"/>
+                                                        <Setter Property="BorderThickness" Value="1"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        
+                                        <Border.InputBindings>
+                                            <MouseBinding MouseAction="LeftClick"
+                                                          Command="{Binding DataContext.OpenAccountCommand, 
+                     RelativeSource={RelativeSource FindAncestor, 
+                     AncestorType={x:Type ItemsControl}}}"
+                                                          CommandParameter="{Binding}" />
+                                        </Border.InputBindings>
 
-                                            <Border Width="5" HorizontalAlignment="Left"
-                                                       Background="{Binding Color}" CornerRadius="5, 0, 0, 5"/>
-                                            <Grid Margin="10">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
+                                        <Grid HorizontalAlignment="Stretch">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
 
-                                                <TextBlock Grid.Row="0" Grid.Column="0"
-                                                           Text="{Binding Name}" FontWeight="Bold" />
-                                                <TextBlock Grid.Row="1" Grid.Column="0"
-                                                           Text="{Binding Description}" FontSize="14" />
-                                                <TextBlock Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
-                                                           Text="{Binding Balance}"
-                                                           VerticalAlignment="Center"
-                                                           HorizontalAlignment="Right"/>
-                                            </Grid>
+                                            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Width="10"
+                                                    HorizontalAlignment="Left"
+                                                    Background="{Binding Color}" CornerRadius="10, 0, 0, 10" />
+
+                                            <TextBlock Grid.Row="0" Grid.Column="1" Margin="5, 5, 5, 0"
+                                                       Text="{Binding Name}" FontWeight="Bold"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       HorizontalAlignment="Left" />
+                                            <TextBlock Grid.Row="1" Grid.Column="1" Margin="5, 0, 5, 5"
+                                                       Text="{Binding Description}" FontSize="10" Foreground="#A9A9A9"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       HorizontalAlignment="Left"
+                                                       TextWrapping="Wrap"
+                                                       Height="25" />
+
+                                            <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"
+                                                       Text="{Binding Balance, StringFormat={}{0:F2}}"
+                                                       VerticalAlignment="Center"
+                                                       Margin="5,0,5,0"
+                                                       HorizontalAlignment="Right" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -111,7 +138,7 @@
                         </ItemsControl>
                         <Border Margin="5" Background="#9D00FF" CornerRadius="10">
                             <Button Background="Transparent" BorderBrush="Transparent" Content="Add an account"
-                                    Command="{Binding AddAccountCommand}"/>
+                                    Command="{Binding AddAccountCommand}" />
                         </Border>
                     </StackPanel>
                 </ScrollViewer>

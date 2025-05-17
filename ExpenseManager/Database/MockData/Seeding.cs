@@ -26,7 +26,7 @@ public static class Seeding
                 Amount = 7.00m,
                 Description = "Test Expense",
                 AccountId = account.Id,
-                Type = Transaction.TransactionType.Entertainment
+                Type = TransactionType.Entertainment
             });
         }
     }
@@ -45,7 +45,7 @@ public static class Seeding
 
         SeedAccount(ctx, user, 69m, 1, "#FF0000");
         SeedAccount(ctx, user, 128m, 2, "#00FF00");
-        SeedAccount(ctx, user, 9999999999.48m, 3, "#0000FF");
+        SeedAccount(ctx, user, 99999.48m, 3, "#0000FF");
     }
     
     public static async Task<bool> Seed(DbContext ctx)
