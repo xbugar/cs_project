@@ -11,7 +11,7 @@
       FontFamily="{StaticResource FunnelDisplayFont}" FontSize="20">
 
 
-    <Grid Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" MaxHeight="600" MaxWidth="1200"
+    <Grid Margin="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MaxHeight="600" MaxWidth="1200"
           MinHeight="500" MinWidth="1000">
         <Grid.DataContext>
             <viewModels:SignViewModel />
@@ -45,8 +45,8 @@
             buy crack.
         </TextBlock>
 
-        <Border Grid.Column="1" Padding="10" HorizontalAlignment="Stretch">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center"
+        <Border Grid.Column="1" Padding="10" HorizontalAlignment="Stretch" Width="430">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Stretch"
                         Margin="20, 120, 20, 0">
                 <TextBlock Text="Sing in to account" FontWeight="UltraBlack"
                            HorizontalAlignment="Left" FontSize="40">
@@ -63,9 +63,21 @@
                         Sign Up
                     </Hyperlink>
                 </TextBlock>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    
+                    <components:Input Grid.Column="0" Grid.Row="0" Text="First Name"
+                                      TextBinding="{Binding User.FirstName}" />
+                    <components:Input Grid.Column="1" Grid.Row="0" Text="Last Name"
+                                      TextBinding="{Binding User.LastName}" />
+                </Grid>
 
                 <components:Input Text="Email"
-                                  TextBinding="{Binding User.Email}" Margin="0, 60, 0, 0" />
+                                  TextBinding="{Binding User.Email}" />
 
                 <components:Password x:Name="Password" />
 

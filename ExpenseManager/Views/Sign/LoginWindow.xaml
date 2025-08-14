@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Title="SigningWindow" Height="700" Width="1200" Background="#16222E" Foreground="AliceBlue"
+        Title="SigningWindow" Height="700" Width="1200" Background="Black" Foreground="AliceBlue"
         FontFamily="{StaticResource FunnelDisplayFont}" FontSize="20">
     <Grid>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
