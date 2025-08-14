@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CSharpFunctionalExtensions;
 using ExpenseManager.Database;
 using ExpenseManager.Models;
 using ExpenseManager.Services;
@@ -14,7 +15,7 @@ public partial class SignViewModel : ObservableObject
     private UserSign _user = new UserSign();
     
     [RelayCommand]
-    private async Task SignIn(PasswordBox passwordBox)
+    private async Task SignIn(string password)
     {
         if (User.Email == null)
         {
@@ -22,15 +23,13 @@ public partial class SignViewModel : ObservableObject
             return;
         }
         
-        var res = await AuthService.SignIn(User.Email, passwordBox.Password);
-        if (res.IsFailure)
+        var (_, isFailure, user, error) = await AuthService.SignIn(User.Email, password);
+        if (isFailure)
         {
-            MessageBox.Show(res.Error);
+            MessageBox.Show(error);
             return;
         }
 
-        var user = res.Value;
-        
         var mainApp = new Views.AppWindow(user);
         mainApp.Show();
         
@@ -39,7 +38,7 @@ public partial class SignViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task SignUp(PasswordBox passwordBox)
+    private async Task SignUp(string password)
     {
         if (User.FirstName == null || User.LastName == null || User.Email == null)
         {
@@ -47,7 +46,7 @@ public partial class SignViewModel : ObservableObject
             return;
         }
         
-        var res = await AuthService.SignUp(User.FirstName, User.LastName, User.Email, passwordBox.Password);
+        var res = await AuthService.SignUp(User.FirstName, User.LastName, User.Email, password);
         if (res.IsFailure)
         {
             MessageBox.Show(res.Error);

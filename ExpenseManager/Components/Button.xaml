@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="ExpenseManager.Components.Button"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ExpenseManager.Components"
+             mc:Ignorable="d"
+             d:DesignHeight="30" d:DesignWidth="300"
+             Background="Transparent" FontSize="20" FontWeight="DemiBold"
+             x:Name="ButtonControl" >
+    <Border CornerRadius="10" Background="#9D00FF" >
+        <Button Content="{Binding ElementName=ButtonControl, Path=Text}" Background="Transparent" BorderBrush="Transparent"
+                HorizontalAlignment="Stretch" Command="{Binding ElementName=ButtonControl, Path=Command}"
+                CommandParameter="{Binding ElementName=ButtonControl, Path=CommandParameter}"
+                Foreground="AliceBlue" />
+    </Border>
+</UserControl>

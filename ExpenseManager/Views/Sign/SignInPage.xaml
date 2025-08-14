@@ -4,8 +4,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
-      xmlns:vm="clr-namespace:ExpenseManager.ViewModels"
       xmlns:viewModels="clr-namespace:ExpenseManager.ViewModels"
+      xmlns:components="clr-namespace:ExpenseManager.Components"
       mc:Ignorable="d"
       Height="600" Width="1200" Background="Transparent" Foreground="AliceBlue"
       FontFamily="{StaticResource FunnelDisplayFont}" FontSize="20">
@@ -64,45 +64,15 @@
                     </Hyperlink>
                 </TextBlock>
 
-                <Border HorizontalAlignment="Stretch" Margin="0, 60, 0, 20">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
-                        <Grid HorizontalAlignment="Stretch" Margin="5">
-                            <TextBlock Foreground="#99999999" Background="Transparent" Text="Email" />
-                            <TextBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
-                                     Text="{Binding User.Email}" />
-                        </Grid>
-                        <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch">
-                            <Rectangle.Effect>
-                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="1" />
-                            </Rectangle.Effect>
-                        </Rectangle>
-                    </StackPanel>
-                </Border>
+                <components:Input Text="Email"
+                                  TextBinding="{Binding User.Email}" Margin="0, 60, 0, 0" />
 
-                <Border HorizontalAlignment="Stretch" Margin="0, 0, 0, 20">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
-                        <Grid HorizontalAlignment="Stretch" Margin="5">
-                            <TextBlock Foreground="#99999999" Background="Transparent" Text="Password" />
-                            <PasswordBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
-                                         x:Name="Password" />
-                        </Grid>
-                        <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch">
-                            <Rectangle.Effect>
-                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="1" />
-                            </Rectangle.Effect>
-                        </Rectangle>
-                    </StackPanel>
-                </Border>
+                <components:Password x:Name="Password" />
 
-                <Border CornerRadius="10" Background="#9D00FF" Margin="0, 20, 0, 0">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20" Color="Black" Opacity="0.5" ShadowDepth="10" />
-                    </Border.Effect>
-                    <Button Content="Log In" Background="Transparent" BorderBrush="Transparent"
-                            HorizontalAlignment="Stretch" Command="{Binding SignInCommand}"
-                            CommandParameter="{Binding ElementName=Password}"
-                            Foreground="AliceBlue" />
-                </Border>
+
+                <components:Button Text="Sign In"
+                                   CommandParameter="{Binding ElementName=Password, Path=Secret}"
+                                   Command="{Binding SignInCommand}" />
             </StackPanel>
         </Border>
     </Grid>

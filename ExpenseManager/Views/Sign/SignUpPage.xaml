@@ -6,6 +6,7 @@
       xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
       xmlns:vm="clr-namespace:ExpenseManager.ViewModels"
       xmlns:viewModels="clr-namespace:ExpenseManager.ViewModels"
+      xmlns:components="clr-namespace:ExpenseManager.Components"
       mc:Ignorable="d"
       Title="SignUpPage" Height="600" Width="1200" Background="Transparent" Foreground="AliceBlue"
       FontFamily="{StaticResource FunnelDisplayFont}" FontSize="20">
@@ -69,86 +70,18 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="0" HorizontalAlignment="Stretch" Margin="0, 60, 5, 20">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
-                            <Grid HorizontalAlignment="Stretch" Margin="5">
-                                <TextBlock Foreground="#99999999" Background="Transparent" Text="First Name" />
-                                <TextBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
-                                         Text="{Binding User.FirstName}" />
-                            </Grid>
-                            <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch">
-                                <Rectangle.Effect>
-                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="1" />
-                                </Rectangle.Effect>
-                            </Rectangle>
-                        </StackPanel>
-                    </Border>
-
-                    <Border Grid.Column="1" HorizontalAlignment="Stretch" Margin="5, 60, 0, 20">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
-                            <Grid HorizontalAlignment="Stretch" Margin="5">
-                                <TextBlock Foreground="#99999999" Background="Transparent" Text="Last Name" />
-                                <TextBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
-                                         Text="{Binding User.LastName}" />
-                            </Grid>
-                            <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch">
-                                <Rectangle.Effect>
-                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="1" />
-                                </Rectangle.Effect>
-                            </Rectangle>
-                        </StackPanel>
-                    </Border>
+                    <components:Input Grid.Column="0" Grid.Row="0" Text="First Name"
+                                      TextBinding="{Binding User.FirstName}" />
+                    <components:Input Grid.Column="1" Grid.Row="0" Text="Last Name"
+                                      TextBinding="{Binding User.LastName}" />
                 </Grid>
 
-                <Border HorizontalAlignment="Stretch" Margin="0, 0, 0, 20">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
-                        <Grid HorizontalAlignment="Stretch" Margin="5">
-                            <TextBlock Foreground="#99999999" Background="Transparent" Text="Email" />
-                            <TextBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
-                                     Text="{Binding User.Email}" />
-                        </Grid>
-                        <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch">
-                            <Rectangle.Effect>
-                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="1" />
-                            </Rectangle.Effect>
-                        </Rectangle>
-                    </StackPanel>
-                </Border>
+                <components:Input Text="Email" TextBinding="{Binding User.Email}" />
+                <components:Password x:Name="Password" />
 
-                <Border HorizontalAlignment="Stretch" Margin="0, 0, 0, 20">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" Background="Transparent">
-                        <Grid HorizontalAlignment="Stretch" Margin="5">
-                            <TextBlock Foreground="#99999999" Background="Transparent" Text="Password" />
-                            <PasswordBox Background="Transparent" BorderBrush="Transparent" Foreground="AliceBlue"
-                                         x:Name="Password" />
-                        </Grid>
-                        <Rectangle Height="2" Fill="AliceBlue" HorizontalAlignment="Stretch">
-                            <Rectangle.Effect>
-                                <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="5" Opacity="1" />
-                            </Rectangle.Effect>
-                        </Rectangle>
-                    </StackPanel>
-                </Border>
-
-                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-
-                </Grid>
-                <Border CornerRadius="10" Background="#9D00FF" Margin="0, 20, 0, 0">
-                    <Button Content="Sign Up" Background="Transparent" BorderBrush="Transparent"
-                            HorizontalAlignment="Stretch" Command="{Binding SignUpCommand}"
-                            CommandParameter="{Binding ElementName=Password}"
-                            Foreground="AliceBlue" />
-                </Border>
+                <components:Button Text="Sign Up"
+                                   Command="{Binding SignUpCommand}"
+                                   CommandParameter="{Binding ElementName=Password, Path=Secret}" />
             </StackPanel>
         </Border>
     </Grid>
